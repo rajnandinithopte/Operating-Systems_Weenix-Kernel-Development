@@ -31,15 +31,19 @@ This phase focused on implementing **basic process control, thread scheduling, a
 - **Basic Kernel Shell (`kshell`)**: Created a basic **debugging shell** with **interactive commands** to test thread scheduling.  
 
 #### **Tests Performed for Kernel 1:**
+
 ✔ **Process Lifecycle Tests**  
    - Verified correct behavior of **process creation (`fork`), execution (`exec`), and termination (`exit`)**.  
-   - Ensured correct **parent-child relationships** were maintained.  
+   - Ensured correct **parent-child relationships** were maintained.
+     
 ✔ **Thread Scheduling Tests**  
    - Checked that the **scheduler correctly switches between threads** using `context_switch`.  
-   - Simulated multi-threaded workloads to verify the **round-robin algorithm**.  
+   - Simulated multi-threaded workloads to verify the **round-robin algorithm**.
+     
 ✔ **Mutex & Synchronization Tests**  
    - Tested **mutex locking & unlocking** to ensure proper synchronization.  
-   - Introduced artificial race conditions to verify **mutex effectiveness**.  
+   - Introduced artificial race conditions to verify **mutex effectiveness**.
+     
 ✔ **Edge Case Testing**  
    - Checked behavior when **a process attempts to fork itself recursively**.  
    - Verified **behavior when all threads terminate, leaving the system idle**.  
@@ -62,15 +66,19 @@ The second kernel phase introduced **file system management**, allowing user-spa
 - **File Locking Mechanisms**: Added **synchronization primitives** for **concurrent access control**.  
 
 #### **Tests Performed for Kernel 2:**
+
 ✔ **Basic File Operations Tests**  
    - Created test programs to verify **`open()`, `read()`, `write()`, and `close()`** behavior.  
-   - Ensured **correct file descriptor allocation and release**.  
+   - Ensured **correct file descriptor allocation and release**.
+     
 ✔ **Path Resolution & Directory Tests**  
    - Tested edge cases such as **absolute vs. relative paths** and **non-existent file handling**.  
-   - Ensured `mkdir()` and `rmdir()` correctly updated the **inode table and directory structures**.  
+   - Ensured `mkdir()` and `rmdir()` correctly updated the **inode table and directory structures**.
+     
 ✔ **Concurrency and Locking Tests**  
    - Simulated multiple threads reading/writing to the same file to verify **lock enforcement**.  
-   - Tested `dup()` and `lseek()` calls under **multi-threaded access scenarios**.  
+   - Tested `dup()` and `lseek()` calls under **multi-threaded access scenarios**.
+     
 ✔ **Corruption Handling Tests**  
    - Deliberately corrupted inode metadata and verified **system resilience to file corruption**.  
    - Checked that **orphaned file descriptors were correctly freed on process termination**.  
@@ -88,19 +96,23 @@ The third and final kernel phase introduced **virtual memory management**, handl
 
 #### **Key Features:**
 - **Demand Paging & Lazy Allocation**: Pages were **loaded into memory only when accessed**, reducing startup costs.  
-- **Copy-On-Write (COW) Optimization**: Forked processes **shared memory pages**, reducing **unnecessary duplication**.  
+- **Copy-On-Write Optimization**: Forked processes **shared memory pages**, reducing **unnecessary duplication**.  
 - **Page Fault Handling**: Implemented a **fault handler** to **load missing pages** from swap storage.  
 - **Memory Protection & Security**: Enforced **access control** via **page permissions (read/write/execute)**.  
 
 #### **Tests Performed for Kernel 3:**
+
 ✔ **Page Fault Handling Tests**  
    - Verified correct **handling of invalid memory accesses** using `gdb`.  
-   - Created test programs to **trigger page faults** and check correct **trap handling**.  
-✔ **Copy-On-Write (COW) Optimization Tests**  
+   - Created test programs to **trigger page faults** and check correct **trap handling**.
+     
+✔ **Copy-On-Write Optimization Tests**  
    - Used `fork()` to create **child processes** and verified **memory sharing efficiency**.  
-   - Measured **memory allocation savings** when running large workloads with `COW`.  
+   - Measured **memory allocation savings** when running large workloads with `COW`.
+      
 ✔ **Virtual Memory Protection Tests**  
-   - Attempted **buffer overflows** and **illegal memory accesses** to check enforcement of **access control mechanisms**.  
+   - Attempted **buffer overflows** and **illegal memory accesses** to check enforcement of **access control mechanisms**.
+     
 ✔ **Swapping & Page Replacement Tests**  
    - Forced memory exhaustion scenarios to verify **page replacement strategy**.  
    - Tested swapping behavior under **heavy memory usage scenarios**.  
